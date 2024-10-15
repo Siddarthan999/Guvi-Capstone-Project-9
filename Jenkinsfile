@@ -60,8 +60,6 @@ pipeline {
         stage('Deploy to Minikube') {
             steps {
                 script {
-                    bat 'minikube start'
-                    bat 'docker context use default'
                     bat 'minikube status'
                     // Deploy the application to Minikube
                     bat 'kubectl apply -f deployment.yaml'
