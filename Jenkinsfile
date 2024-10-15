@@ -35,7 +35,6 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    // Build the Docker image using the Dockerfile in the project root
                     bat """
                         docker build -t ${DOCKER_IMAGE} .
                     """
@@ -53,19 +52,6 @@ pipeline {
                     bat """
                         docker push ${DOCKER_IMAGE}:${DOCKER_TAG}
                     """
-                }
-            }
-        }
-        stage('Deploy to Minikube') {
-            steps {
-                script {
-                    bat 'minikube status'
-                    // Deploy the application to Minikube
-                    bat 'kubectl apply -f deployment.yaml'
-                    bat 'timeout /t 60'
-                    bat 'kubectl apply -f service.yaml'
-                    bat 'kubectl get svc'
-                    bat 'kubectl service nodeapp-service'
                 }
             }
         }
