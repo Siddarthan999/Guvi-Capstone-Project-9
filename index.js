@@ -12,9 +12,19 @@ app.get('/authors', function (req, res) {
 app.get('/greetings', function (req, res) {
     res.send('{ "response": "Welcome, all" }');
 });
+
 app.get('/ready', function (req, res) {
     res.send('{ "response": " Great!, It works!" }');
 });
 
-app.listen(process.env.PORT || 3000);
-module.exports = app;
+let server;
+
+function startServer(callback) {
+    server = app.listen(process.env.PORT || 3000, callback);
+}
+
+function closeServer(callback) {
+    server.close(callback);
+}
+
+module.exports = { app, startServer, closeServer };
