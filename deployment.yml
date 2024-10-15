@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: capstone-nodeapp-deployment
+  labels:
+    app: capstone-nodeapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: capstone-nodeapp
+  template:
+    metadata:
+      labels:
+        app: capstone-nodeapp 
+    spec:
+      containers:
+      - name: capstone-nodeserver
+        image: siddarthan5/capstone-node-project:latest
+        ports:
+        - containerPort: 3000
