@@ -20,7 +20,6 @@ pipeline {
         stage('Build App') {
             steps {
                 bat 'npm install'
-                bat 'npm run build'
             }
         }
         stage('Code Quality') {
